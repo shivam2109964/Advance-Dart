@@ -34,6 +34,16 @@ void main() {
   //Que4 Result direct and manually
   var que4D = sumOfAllUniCodeDirect(name);
   print(que4D);
+
+  var que4M = sumOfAllUniCodeManually(name);
+  print(que4M);
+
+  //Que5 Result direct
+  var que5D = encryptData(name);
+  print(que5D);
+  //Decrypted Data
+  var decrypted = decryptData(que5D);
+  print(decrypted);
 }
 
 List<int> generateCodeUnit(String str) {
@@ -143,4 +153,62 @@ int sumOfAllUniCodeDirect(String str) {
   return convertToUniCode.reduce((value, element) {
     return value + element;
   });
+}
+
+int sumOfAllUniCodeManually(String str) {
+  List<int> convertToUniCode = [];
+  int sum = 0;
+  for (int i = 0; i <= str.length - 1; i++) {
+    convertToUniCode.add(str.codeUnitAt(i));
+  }
+
+  for (int i = 0; i <= convertToUniCode.length - 1; i++) {
+    sum += convertToUniCode[i];
+  }
+  return sum;
+}
+
+/// Que.5 String Encryption using Code Units
+/// Implement a function that encrypts a string by shifting each characters's unicode code unit
+/// by a certain number of position (Caesar cipher).
+
+String encryptData(String str) {
+  List<int> convertUniCode = [];
+  List<int> encryptedData = [];
+  List<String> newData = [];
+  for (int i = 0; i <= str.length - 1; i++) {
+    convertUniCode.add(str.codeUnitAt(i));
+  }
+  for (int element in convertUniCode) {
+    int shiftPos = element += 5;
+    encryptedData.add(shiftPos);
+  }
+  for (int element in encryptedData) {
+    String rawData = String.fromCharCode(element);
+    newData.add(rawData);
+  }
+  return newData.join();
+}
+
+///Now decrypt the encrypted data
+String decryptData(String str) {
+  List<int> convertUniCode = [];
+  List<int> shiftBackData = [];
+  List<String> orignalData = [];
+
+  for (int i = 0; i <= str.length - 1; i++) {
+    convertUniCode.add(str.codeUnitAt(i));
+  }
+
+  for (int element in convertUniCode) {
+    int shiftPosBack = element -= 5;
+    shiftBackData.add(shiftPosBack);
+  }
+
+  for (int element in shiftBackData) {
+    String origData = String.fromCharCode(element);
+    orignalData.add(origData);
+  }
+
+  return orignalData.join();
 }
