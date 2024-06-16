@@ -5,11 +5,23 @@
 void main() {
   String str = 'SHIVAM';
   String str1 = 'GUPTA';
+  List<String> list = [
+    'computer',
+    'laptop',
+    'mobile',
+    'camera',
+    'desktop',
+    'drone'
+  ];
   String sortedUsingComp = sortUsingCompare(str);
   print(sortedUsingComp);
 
   String lexicoGraphical = intCompareTo(str, str1);
   print(lexicoGraphical);
+
+  List<String> sortedList = sortUsingComp(list);
+  print("Original list $list");
+  print("SortedList $sortedList");
 }
 
 //Practice
@@ -36,4 +48,11 @@ String sortUsingCompare(String str) {
   }
   sortedData.sort((element, element1) => element.compareTo(element1));
   return sortedData.join();
+}
+
+//Sort a list
+List<String> sortUsingComp(List<String> list) {
+ List<String> sortedList = List.from(list);
+ sortedList.sort((element, element1) => element.compareTo(element1));
+ return sortedList;
 }
